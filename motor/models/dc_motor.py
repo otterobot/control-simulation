@@ -6,17 +6,25 @@ matplotlib.use("TkAgg")
 
 import matplotlib.pyplot as plt
 
+import yaml
+
+with open("../parameters/example_motor.yaml", "r") as file:
+    motor_params = yaml.safe_load(file)
+
+with open("../experiments/step_response.yaml", "r") as file:
+    experiment_params = yaml.safe_load(file)
+
 # Motor parameters (illustrative values)
-R = 3.0        # Armature resistance [Ohm]
-L = 0.002      # Armature inductance [H]
-Ke = 0.02      # Back EMF constant [V*s/rad]
-Kt = 0.02      # Torque constant [N*m/A]
-J = 0.0001     # Moment of inertia [kg*m^2]
-b = 0.00001    # Viscous friction coefficient [N*m*s/rad]
+R = motor_params["R"]        # Armature resistance [Ohm]
+L = motor_params["L"]      # Armature inductance [H]
+Ke = motor_params["Ke"]      # Back EMF constant [V*s/rad]
+Kt = motor_params["Kt"]      # Torque constant [N*m/A]
+J = motor_params["J"]     # Moment of inertia [kg*m^2]
+b = motor_params["b"]    # Viscous friction coefficient [N*m*s/rad]
 
 # Input parameters
-V = 6.0        # Applied voltage [V]
-T_load = 0.0   # Load torque [N*m]
+V = experiment_params["input"]["voltage"]       # Applied voltage [V]
+T_load = experiment_params["input"]["load_torque"]  # Load torque [N*m]
 
 
 
@@ -38,9 +46,9 @@ x0 = [0.0, 0.0]  # [Current, Angular velocity]
 
 # Simulation settings
 t_start = 0.0
-t_end = 4.0
+t_end = experiment_params["simulation"]["duration"]
 
-t_eval = np.linspace(t_start, t_end, 2000)
+t_eval = np.linspace(t_start, t_end, experiment_params["simulation"]["samples"])
 
 # Numerical integration
 solution = solve_ivp(

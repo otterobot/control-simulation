@@ -1,0 +1,11 @@
+name: "REAL DC Motor"
+
+# Electrical parameters
+R: 3.0          # Armature resistance [Ohm]
+L: 0.002        # Armature inductance [H]
+Ke: 0.02        # Back EMF constant [V*s/rad]
+Kt: 0.02        # Torque constant [N*m/A]
+
+# Mechanical parameters
+J: 0.0001       # Moment of inertia [kg*m^2]
+b: 0.00001      # Viscous friction coefficient [N*m*s/rad]

@@ -1,0 +1,9 @@
+name: "Open-Loop Step Response"
+
+simulation:
+  duration: 4.0          # [s]
+  samples: 2000
+
+input:
+  voltage: 6.0           # [V]
+  load_torque: 0.0       # [N*m]
